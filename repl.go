@@ -30,6 +30,10 @@ func filterSlice[T any](s []T, f func(T) bool) []T {
 func repl() {
 	scanner := bufio.NewScanner(os.Stdin)
 	registry := getRegistry()
+	config, err := getOriginalConfig()
+	if err != nil {
+		fmt.Printf("Error: %v", err)
+	}
 	for {
 		fmt.Print("Pokedex > ")
 		scanner.Scan()
@@ -41,7 +45,8 @@ func repl() {
 			fmt.Printf("Unknown command: %s\n", firstWord)
 			continue
 		}
-		err := command.callback()
+
+		err := command.callback(config)
 		if err != nil {
 			fmt.Printf("Error: %v", err)
 		}
