@@ -7,15 +7,6 @@ import (
 	"strings"
 )
 
-func cleanInput(text string) []string {
-	text = strings.ToLower(text)
-	words := strings.Split(text, " ")
-	words = filterSlice(words, func(s string) bool {
-		return s != ""
-	})
-	return words
-}
-
 func filterSlice[T any](s []T, f func(T) bool) []T {
 	n := 0
 	for _, val := range s {
@@ -27,28 +18,50 @@ func filterSlice[T any](s []T, f func(T) bool) []T {
 	return s[:n]
 }
 
-func repl() {
-	scanner := bufio.NewScanner(os.Stdin)
-	registry := getRegistry()
-	config, err := getOriginalConfig()
-	if err != nil {
-		fmt.Printf("Error: %v", err)
+func cleanUserInput(text string) []string {
+	text = strings.ToLower(text)
+	words := strings.Split(text, " ")
+	return filterSlice(words, func(s string) bool {
+		return s != ""
+	})
+}
+
+func promptAndGetInput(scanner *bufio.Scanner) []string {
+	fmt.Print("Pokedex > ")
+	scanner.Scan()
+	text := scanner.Text()
+	cleanedText := cleanUserInput(text)
+	return cleanedText
+}
+
+func getFirstWord(words []string) string {
+	if len(words) == 0 {
+		fmt.Printf("No command provided\n\n")
+		return "help"
 	}
+	return words[0]
+}
+
+func runCommandCallback(config *Config, command CliCommand) {
+	err := command.callback(config)
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+	}
+}
+
+func runREPL(config *Config) {
+	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Print("Pokedex > ")
-		scanner.Scan()
-		text := scanner.Text()
-		cleanedText := cleanInput(text)
-		firstWord := cleanedText[0]
-		command, ok := registry[firstWord]
+		words := promptAndGetInput(scanner)
+
+		firstWord := getFirstWord(words)
+
+		command, ok := getCommandRegistry()[firstWord]
 		if !ok {
 			fmt.Printf("Unknown command: %s\n", firstWord)
 			continue
 		}
 
-		err := command.callback(config)
-		if err != nil {
-			fmt.Printf("Error: %v", err)
-		}
+		runCommandCallback(config, command)
 	}
 }
