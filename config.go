@@ -1,20 +1,19 @@
 package main
 
-import "net/url"
+import (
+	"bootdev-pokedex-go/internal/pokeapi"
+	"time"
+)
 
 type Config struct {
-	Next     url.URL
-	Previous url.URL
+	pokeapiClient pokeapi.Client
+	Next          *string
+	Previous      *string
 }
 
-func getOriginalConfig() (*Config, error) {
-	originalURL, err := url.Parse("https://pokeapi.co/api/v2/location-area/")
-	if err != nil {
-		return &Config{}, err
-	}
+func NewConfig() *Config {
 	config := Config{
-		Next:     *originalURL,
-		Previous: *originalURL,
+		pokeapiClient: pokeapi.NewClient(5 * time.Second),
 	}
-	return &config, nil
+	return &config
 }
