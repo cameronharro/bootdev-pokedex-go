@@ -6,8 +6,10 @@ type CliCommand struct {
 	callback    func(config *Config) error
 }
 
-func getRegistry() map[string]CliCommand {
-	registry := map[string]CliCommand{
+type CommandRegistry map[string]CliCommand
+
+func getCommandRegistry() CommandRegistry {
+	registry := CommandRegistry{
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
@@ -22,6 +24,11 @@ func getRegistry() map[string]CliCommand {
 			name:        "map",
 			description: "Displays the next 20 location areas",
 			callback:    mapCallback,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Displays the previous 20 location areas",
+			callback:    mapbCallback,
 		},
 	}
 	return registry
