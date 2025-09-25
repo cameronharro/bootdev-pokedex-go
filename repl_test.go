@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestCleanInput(t *testing.T) {
+func TestCleanUserInput(t *testing.T) {
 	cases := []struct {
 		input    string
 		expected []string
@@ -37,6 +37,29 @@ func TestCleanInput(t *testing.T) {
 			if word != expected {
 				t.Errorf("Failure: actual %v does not equal expected %v", word, expected)
 			}
+		}
+	}
+}
+
+func TestGetFirstWord(t *testing.T) {
+	cases := []struct {
+		input    []string
+		expected string
+	}{
+		{
+			input:    []string{},
+			expected: "help",
+		},
+		{
+			input:    []string{"map", "mapb"},
+			expected: "map",
+		},
+	}
+
+	for _, c := range cases {
+		actual := getFirstWord(c.input)
+		if c.expected != actual {
+			t.Errorf("Failure: actual %s does not equal expected %v", actual, c.expected)
 		}
 	}
 }
