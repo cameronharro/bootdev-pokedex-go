@@ -13,7 +13,7 @@ type Config struct {
 
 func NewConfig() *Config {
 	config := Config{
-		pokeapiClient: pokeapi.NewClient(5 * time.Second),
+		pokeapiClient: pokeapi.NewClient(5*time.Second, 5*time.Second),
 	}
 	return &config
 }

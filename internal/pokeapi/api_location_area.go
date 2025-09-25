@@ -2,7 +2,6 @@ package pokeapi
 
 import (
 	"encoding/json"
-	"io"
 )
 
 func (c *Client) GetLocationAreas(pageURL *string) (BulkLocationArea, error) {
@@ -11,12 +10,7 @@ func (c *Client) GetLocationAreas(pageURL *string) (BulkLocationArea, error) {
 		url = *pageURL
 	}
 
-	res, err := c.httpClient.Get(url)
-	if err != nil {
-		return BulkLocationArea{}, err
-	}
-
-	data, err := io.ReadAll(res.Body)
+	data, err := c.Get(url)
 	if err != nil {
 		return BulkLocationArea{}, err
 	}
