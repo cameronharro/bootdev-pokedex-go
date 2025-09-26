@@ -35,6 +35,11 @@ func getCommandRegistry() CommandRegistry {
 			description: "Usage: explore <area-name-or-id> | Displays the pokemon that may be encountered in a location area",
 			callback:    exploreCallback,
 		},
+		"catch": {
+			name:        "catch",
+			description: "Usage: catch <pokemon-name-or-id> | Attempts to catch the named Pokemon",
+			callback:    catchCallback,
+		},
 	}
 	return registry
 }
