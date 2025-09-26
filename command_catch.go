@@ -7,7 +7,7 @@ import (
 )
 
 func wasCaught(pokemon pokeapi.Pokemon) bool {
-	maxBaseExperience := float64(609)
+	maxBaseExperience := float64(325)
 	chanceOfCatching := float64(1) - float64(pokemon.BaseExperience)/maxBaseExperience
 	return rand.Float64() < chanceOfCatching
 }
