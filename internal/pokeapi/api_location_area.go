@@ -22,3 +22,18 @@ func (c *Client) GetLocationAreas(pageURL *string) (BulkLocationArea, error) {
 
 	return result, nil
 }
+
+func (c *Client) ExploreLocationArea(locationArea string) (LocationArea, error) {
+	url := baseURL + "/location-area/" + locationArea
+
+	data, err := c.Get(url)
+	if err != nil {
+		return LocationArea{}, err
+	}
+
+	result := LocationArea{}
+	if err = json.Unmarshal(data, &result); err != nil {
+		return LocationArea{}, err
+	}
+	return result, nil
+}

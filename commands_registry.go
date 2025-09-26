@@ -30,6 +30,11 @@ func getCommandRegistry() CommandRegistry {
 			description: "Displays the previous 20 location areas",
 			callback:    mapbCallback,
 		},
+		"explore": {
+			name:        "explore",
+			description: "Usage: explore <area-name-or-id> | Displays the pokemon that may be encountered in a location area",
+			callback:    exploreCallback,
+		},
 	}
 	return registry
 }
