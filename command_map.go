@@ -21,7 +21,6 @@ func printLocationAreas(locationAreas pokeapi.BulkLocationArea) {
 }
 
 func mapCallback(config *Config, args []string) error {
-	fmt.Println(args)
 	locationAreas, err := config.pokeapiClient.GetLocationAreas(config.Next)
 	if err != nil {
 		return err
