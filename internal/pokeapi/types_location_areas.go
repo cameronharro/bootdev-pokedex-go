@@ -4,10 +4,10 @@ type BulkLocationArea struct {
 	Count    int
 	Next     *string
 	Previous *string
-	Results  []NamedAPIResource
+	Results  []namedAPIResource
 }
 
-type NamedAPIResource struct {
+type namedAPIResource struct {
 	Name string
 	Url  string
 }
@@ -16,42 +16,42 @@ type LocationArea struct {
 	Id                   int                   `json:"id"`
 	Name                 string                `json:"name"`
 	GameIndex            int                   `json:"game_index"`
-	EncounterMethodRates []EncounterMethodRate `json:"encounter_method_rates"`
-	Location             NamedAPIResource      `json:"location"`
-	Names                []Name                `json:"names"`
-	PokemonEncounters    []PokemonEncounter    `json:"pokemon_encounters"`
+	EncounterMethodRates []encounterMethodRate `json:"encounter_method_rates"`
+	Location             namedAPIResource      `json:"location"`
+	Names                []name                `json:"names"`
+	PokemonEncounters    []pokemonEncounter    `json:"pokemon_encounters"`
 }
 
-type EncounterMethodRate struct {
-	EncounterMethod NamedAPIResource          `json:"encounter_method"`
-	VersionDetails  []EncounterVersionDetails `json:"version_details"`
+type encounterMethodRate struct {
+	EncounterMethod namedAPIResource          `json:"encounter_method"`
+	VersionDetails  []encounterVersionDetails `json:"version_details"`
 }
 
-type EncounterVersionDetails struct {
+type encounterVersionDetails struct {
 	Rate    int              `json:"rate"`
-	Version NamedAPIResource `json:"version"`
+	Version namedAPIResource `json:"version"`
 }
 
-type Name struct {
+type name struct {
 	Name     string           `json:"name"`
-	Language NamedAPIResource `json:"language"`
+	Language namedAPIResource `json:"language"`
 }
 
-type PokemonEncounter struct {
-	Pokemon        NamedAPIResource         `json:"pokemon"`
-	VersionDetails []VersionEncounterDetail `json:"version_details"`
+type pokemonEncounter struct {
+	Pokemon        namedAPIResource         `json:"pokemon"`
+	VersionDetails []versionEncounterDetail `json:"version_details"`
 }
 
-type VersionEncounterDetail struct {
-	Version          NamedAPIResource `json:"version"`
+type versionEncounterDetail struct {
+	Version          namedAPIResource `json:"version"`
 	MaxChance        int              `json:"max_chance"`
-	EncounterDetails []Encounter      `json:"encounter_details"`
+	EncounterDetails []encounter      `json:"encounter_details"`
 }
 
-type Encounter struct {
+type encounter struct {
 	MinLevel        int                `json:"min_level"`
 	MaxLevel        int                `json:"max_level"`
-	ConditionValues []NamedAPIResource `json:"condition_values"`
+	ConditionValues []namedAPIResource `json:"condition_values"`
 	Chance          int                `json:"chance"`
-	Method          NamedAPIResource   `json:"method"`
+	Method          namedAPIResource   `json:"method"`
 }
