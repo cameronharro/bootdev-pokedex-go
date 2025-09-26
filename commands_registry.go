@@ -3,7 +3,7 @@ package main
 type CliCommand struct {
 	name        string
 	description string
-	callback    func(config *Config) error
+	callback    func(config *Config, args []string) error
 }
 
 type CommandRegistry map[string]CliCommand

@@ -42,8 +42,8 @@ func getFirstWord(words []string) string {
 	return words[0]
 }
 
-func runCommandCallback(config *Config, command CliCommand) {
-	err := command.callback(config)
+func runCommandCallback(config *Config, command CliCommand, args []string) {
+	err := command.callback(config, args)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
@@ -62,6 +62,6 @@ func runREPL(config *Config) {
 			continue
 		}
 
-		runCommandCallback(config, command)
+		runCommandCallback(config, command, words[1:])
 	}
 }
