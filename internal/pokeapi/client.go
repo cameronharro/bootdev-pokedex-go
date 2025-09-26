@@ -2,6 +2,7 @@ package pokeapi
 
 import (
 	"bootdev-pokedex-go/internal/pokecache"
+	"fmt"
 	"io"
 	"net/http"
 	"time"
@@ -29,6 +30,10 @@ func (c *Client) Get(url string) ([]byte, error) {
 	res, err := c.httpClient.Get(url)
 	if err != nil {
 		return []byte{}, err
+	}
+
+	if res.StatusCode > 299 {
+		return []byte{}, fmt.Errorf("Error: response status code %d", res.StatusCode)
 	}
 
 	data, err := io.ReadAll(res.Body)
