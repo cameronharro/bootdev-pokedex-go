@@ -17,7 +17,7 @@ type Pokemon struct {
 	PastTypes              []pokemonTypePast    `json:"past_types"`
 	PastAbilities          []pokemonAbilityPast `json:"past_abilities"`
 	Sprites                pokemonSprites       `json:"sprites"`
-	Cries                  []pokemonCries       `json:"cries"`
+	Cries                  pokemonCries         `json:"cries"`
 	Species                namedAPIResource     `json:"species"`
 	Stats                  []pokemonStat        `json:"stats"`
 	Types                  []pokemonType        `json:"types"`
