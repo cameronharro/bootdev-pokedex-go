@@ -40,6 +40,11 @@ func getCommandRegistry() CommandRegistry {
 			description: "Usage: catch <pokemon-name-or-id> | Attempts to catch the named Pokemon",
 			callback:    catchCallback,
 		},
+		"inspect": {
+			name:        "inspect",
+			description: "Usage: inspect <pokemon-name> | Prints information about a captured pokemon",
+			callback:    inspectCallback,
+		},
 	}
 	return registry
 }
