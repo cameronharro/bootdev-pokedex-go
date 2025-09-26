@@ -22,7 +22,7 @@ func NewClient(requestTimeout, reapInterval time.Duration) Client {
 	}
 }
 
-func (c *Client) Get(url string) ([]byte, error) {
+func (c *Client) get(url string) ([]byte, error) {
 	if data, ok := c.cache.Get(url); ok {
 		return data, nil
 	}

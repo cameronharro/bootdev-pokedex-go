@@ -10,7 +10,7 @@ func (c *Client) GetLocationAreas(pageURL *string) (BulkLocationArea, error) {
 		url = *pageURL
 	}
 
-	data, err := c.Get(url)
+	data, err := c.get(url)
 	if err != nil {
 		return BulkLocationArea{}, err
 	}
@@ -26,7 +26,7 @@ func (c *Client) GetLocationAreas(pageURL *string) (BulkLocationArea, error) {
 func (c *Client) ExploreLocationArea(locationArea string) (LocationArea, error) {
 	url := baseURL + "/location-area/" + locationArea
 
-	data, err := c.Get(url)
+	data, err := c.get(url)
 	if err != nil {
 		return LocationArea{}, err
 	}

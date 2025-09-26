@@ -7,7 +7,7 @@ import (
 func (c *Client) GetPokemon(pokemon string) (Pokemon, error) {
 	url := baseURL + "/pokemon/" + pokemon
 
-	data, err := c.Get(url)
+	data, err := c.get(url)
 	if err != nil {
 		return Pokemon{}, err
 	}
