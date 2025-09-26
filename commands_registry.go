@@ -45,6 +45,11 @@ func getCommandRegistry() CommandRegistry {
 			description: "Usage: inspect <pokemon-name> | Prints information about a captured pokemon",
 			callback:    inspectCallback,
 		},
+		"pokedex": {
+			name:        "pokedex",
+			description: "Prints the names of all captured pokemon",
+			callback:    pokedexCallback,
+		},
 	}
 	return registry
 }
